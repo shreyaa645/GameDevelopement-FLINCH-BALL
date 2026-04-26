@@ -2,63 +2,85 @@
 <html lang="en">
 <head>
     <link rel="stylesheet" href="./play.css">
-    <meta charset="UTF-8"> 
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flinch Ball</title>
+    <title>Flinch Ball | Neon Arcade</title>
 </head>
 
 <body>
+    <div class="bg-grid"></div>
+    <div class="bg-sun"></div>
+
+    <div class="ambient-particles">
+        <span></span><span></span><span></span><span></span><span></span>
+        <span></span><span></span><span></span><span></span><span></span>
+        <span></span><span></span><span></span><span></span><span></span>
+    </div>
+
+    <div class="high-score-box">
+        <span>BEST</span>
+        <strong id="homeHighScore">0</strong>
+    </div>
+
     <header>
         <h1 class="title">FLINCH BALL</h1>
+        <p class="subtitle">▸ NEON ARCADE EDITION ◂</p>
     </header>
 
     <div class="instructions">
         <h1 class="heading">INSTRUCTIONS</h1>
-        <h2>Help the neon ball fly and dodge the glowing obstacles.<br>Use Spacebar or Enter to jump!</h2>
+        <h2>
+            Pilot the glowing neon ball through the synthwave grid.<br>
+            Press <span class="key">SPACE</span>, <span class="key">ENTER</span>, or tap/click to jump.<br>
+            Dodge glowing obstacles, build combos, and beat your high score.
+        </h2>
     </div>
 
     <div class="name">
         <form action="javascript:void(0);" method="post" id="nameForm">
-            <label for="firstName">Enter your name:</label>
-            <input type="text" id="firstName" name="firstName" required>
+            <label for="firstName">PILOT NAME</label>
+            <input type="text" id="firstName" name="firstName" placeholder="Enter your name" required>
 
-            <label for="lastName">Enter a username:</label>
-            <input type="text" id="lastName" name="lastName" required>
+            <label for="lastName">CALLSIGN / USERNAME</label>
+            <input type="text" id="lastName" name="lastName" placeholder="Enter your username" required>
 
-            <input type="button" value="Submit" onclick="submitForm()">
+            <input type="button" value="LOCK CALLSIGN" onclick="submitForm()">
         </form>
-    </div> 
+    </div>
 
     <div class="nickname" id="nicknameDiv" style="display: none;">
-        <h2>Nickname: <span id="nicknameDisplay"></span></h2>
+        <h2>CALLSIGN LOCKED: <span id="nicknameDisplay"></span></h2>
     </div>
 
     <div class="help" style="display: none;">
-        <h1>You're Ready! Let's Play!</h1>
+        <h1>⚡ SYSTEMS ONLINE ⚡</h1>
     </div>
 
-    <a href="game.html" class="play-button" id="playButton" style="display: none;">PLAY</a>        
+    <a href="game.html" class="play-button" id="playButton" style="display: none;">▶ LAUNCH</a>
 
     <script>
+        const savedHighScore = parseInt(localStorage.getItem("highScore") || "0", 10);
+        document.getElementById("homeHighScore").textContent = savedHighScore.toLocaleString();
+
         function submitForm() {
-            var firstName = document.getElementById("firstName").value;
-            var lastName = document.getElementById("lastName").value;
+            const firstName = document.getElementById("firstName").value.trim();
+            const lastName = document.getElementById("lastName").value.trim();
 
             if (firstName && lastName) {
-                var nickname = lastName;
-                document.getElementById("nicknameDisplay").textContent = nickname;
+                const nickname = lastName;
 
+                document.getElementById("nicknameDisplay").textContent = nickname;
                 document.getElementById("nameForm").style.display = "none";
                 document.getElementsByClassName("help")[0].style.display = "block";
                 document.getElementById("nicknameDiv").style.display = "block";
 
-                var playButton = document.getElementById("playButton");
-                playButton.style.display = "block";
-                playButton.href = 'game.html?nickname=' + encodeURIComponent(nickname);
+                const playButton = document.getElementById("playButton");
+                playButton.style.display = "inline-block";
+                playButton.href = "game.html?nickname=" + encodeURIComponent(nickname);
 
-                localStorage.setItem('nickname', nickname);
+                localStorage.setItem("nickname", nickname);
             } else {
-                alert("Please fill in both fields.");
+                alert("Please fill in both fields, pilot.");
             }
         }
     </script>

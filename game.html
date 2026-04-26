@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flinch Ball</title>
+    <title>Flinch Ball | In Game</title>
     <link rel="stylesheet" href="game.css">
 </head>
 
@@ -11,11 +11,63 @@
     <audio id="background-audio" loop>
         <source src="./GAME.mp3" type="audio/mp3">
     </audio>
+
     <audio id="hit-audio">
         <source src="./HIT.wav" type="audio/wav">
     </audio>
 
-    <canvas id="gameCanvas" width="800" height="400"></canvas>
+    <div id="screen-shake">
+        <canvas id="gameCanvas"></canvas>
+    </div>
+
+    <div id="hit-flash"></div>
+    <div id="popup-layer"></div>
+    <div id="achievements"></div>
+
+    <div id="hud">
+        <div class="hud-left">
+            <div class="hud-block">
+                <span class="hud-label">PILOT</span>
+                <span id="hud-nickname" class="hud-value">---</span>
+            </div>
+
+            <div class="hud-block">
+                <span class="hud-label">SCORE</span>
+                <span id="hud-score" class="hud-value score-value">0</span>
+            </div>
+
+            <div class="hud-block">
+                <span class="hud-label">BEST</span>
+                <span id="hud-best" class="hud-value">0</span>
+            </div>
+
+            <div class="hud-block">
+                <span class="hud-label">COMBO</span>
+                <span id="hud-combo" class="hud-value combo-value">x1</span>
+            </div>
+
+            <div class="hud-block difficulty">
+                <span class="hud-label">DIFFICULTY</span>
+                <div class="diff-bar">
+                    <div id="diff-fill" class="diff-fill"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="hud-right">
+            <button id="sound-toggle" class="hud-btn" title="Sound Toggle">🔊</button>
+            <button id="pause-btn" class="hud-btn" title="Pause">⏸</button>
+        </div>
+    </div>
+
+    <div id="pause-overlay" class="overlay hidden">
+        <div class="overlay-card">
+            <h1>PAUSED</h1>
+            <p>Take a breath, pilot.</p>
+            <button id="resume-btn" class="overlay-btn">▶ RESUME</button>
+            <a href="index.html" class="overlay-btn ghost">⟵ MENU</a>
+        </div>
+    </div>
 
     <script src="game.js"></script>
 </body>

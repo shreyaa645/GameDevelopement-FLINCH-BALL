@@ -4,22 +4,60 @@
     <link rel="stylesheet" href="retry.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flinch Ball - Game Over</title>
+    <title>Flinch Ball | Game Over</title>
 </head>
 
 <body>
+    <div class="bg-grid"></div>
+    <div class="bg-sun"></div>
+
     <div class="game-over">
-        <h1 class="heading">GAME OVER</h1>
-        <h2>Oops! The ball hit an obstacle.<br>You played well!</h2>
-        <h3 id="final-score"></h3>
+        <h1 class="heading glitch" data-text="GAME OVER">GAME OVER</h1>
+
+        <div id="new-high-badge" class="new-high" style="display: none;">
+            ★ NEW HIGH SCORE ★
+        </div>
+
+        <h2>Connection lost. The neon orb has fallen.</h2>
+
+        <div class="score-grid">
+            <div class="score-card">
+                <span class="score-label">PILOT</span>
+                <span id="final-pilot" class="score-value">---</span>
+            </div>
+
+            <div class="score-card big">
+                <span class="score-label">FINAL SCORE</span>
+                <span id="final-score" class="score-value">0</span>
+            </div>
+
+            <div class="score-card">
+                <span class="score-label">BEST</span>
+                <span id="best-score" class="score-value">0</span>
+            </div>
+        </div>
     </div>
 
-    <a href="index.html" class="retry-button">RETRY</a>
+    <div class="actions">
+        <a href="game.html" class="retry-button" id="retryButton">↻ RETRY</a>
+        <a href="index.html" class="retry-button ghost">⟵ MENU</a>
+    </div>
 
     <script>
-        const score = localStorage.getItem('finalScore');
-        const nickname = localStorage.getItem('finalNickname');
-        document.getElementById('final-score').textContent = `${nickname}'s FINAL SCORE: ${score}`;
+        const score = parseInt(localStorage.getItem("finalScore") || "0", 10);
+        const nickname = localStorage.getItem("finalNickname") || "PILOT";
+        const best = parseInt(localStorage.getItem("highScore") || "0", 10);
+        const isNewHigh = localStorage.getItem("finalIsHigh") === "1";
+
+        document.getElementById("final-score").textContent = score.toLocaleString();
+        document.getElementById("final-pilot").textContent = nickname;
+        document.getElementById("best-score").textContent = best.toLocaleString();
+
+        document.getElementById("retryButton").href = "game.html?nickname=" + encodeURIComponent(nickname);
+
+        if (isNewHigh) {
+            document.getElementById("new-high-badge").style.display = "inline-block";
+        }
     </script>
 </body>
 </html>
