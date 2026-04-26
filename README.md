@@ -26,7 +26,7 @@ Hi, I’m **Shreya Pawar**, a Computer Science student who loves designing inter
 
 ## 🚀 Live Game
 
-🔗 [**Play Flinch Ball**](https://shreyaa645.github.io/GameDevelopement-FLINCH-BALL/)  
+🔗 [**Play Flinch Ball**](https://game-developement-flinch-ball.vercel.app/)  
 
 ---
 
